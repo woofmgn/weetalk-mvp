@@ -1,0 +1,8 @@
+.promo {
+  box-shadow: inset 34.9333px -34.9333px 34.9333px rgba(165, 165, 165, 0.13), inset -34.9333px 34.9333px 34.9333px rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(21.3093px);
+
+  &__wrapper {
+    max-width: 294px;
+  }
+}
