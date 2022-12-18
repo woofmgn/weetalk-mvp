@@ -1,0 +1,38 @@
+.navbar {
+  background-color: #1A78AE;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 370px;
+  height: 50px;
+
+  &__wrapper {
+    margin: 8px 47px;
+  }
+
+  &__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__item {
+    display: flex;
+    align-self: center;
+    width: 34px;
+    height: 34px;
+    box-sizing: border-box;
+
+    &_active {
+      border-radius: 50%;
+      border: 2px solid #FFF;
+    }
+  }
+
+  &__icon {
+    display: block;
+    margin: auto;
+  }
+}

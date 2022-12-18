@@ -1,8 +1,68 @@
 .promo {
   box-shadow: inset 34.9333px -34.9333px 34.9333px rgba(165, 165, 165, 0.13), inset -34.9333px 34.9333px 34.9333px rgba(255, 255, 255, 0.13);
   backdrop-filter: blur(21.3093px);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+// пофиксить, блюр сейчас не на всю высоту экрана
 
   &__wrapper {
+    margin-top: 44px;
     max-width: 294px;
+  }
+
+  &__title {
+    margin: 0;
+    padding-bottom: 19px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 31px;
+    color: #FFFFFF;
+  }
+
+  &__description {
+    margin: 0;
+    padding-bottom: 78px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FFFFFF;
+  }
+}
+
+.hints-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  gap: 59px;
+
+  &__item {
+    margin-left: 6px;
+    display: flex;
+  }
+
+  &__wrapper {
+    display: flex;
+    max-width: 56px;
+    height: 56px;
+    background-color: #FFF;
+    border-radius: 10px;
+  }
+
+  &__icon {
+    margin: 12px 12px;
+  }
+
+  &__title {
+    margin: 0;
+    margin-left: 10px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #FFFFFF;
   }
 }
