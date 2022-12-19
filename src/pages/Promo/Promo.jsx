@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import adviseIcon from "../../images/advise-icon.svg";
 import likeIcon from "../../images/like-icon.svg";
 import membersIcon from "../../images/members-icon.svg";
@@ -6,8 +7,13 @@ import profileIcon from "../../images/profile-icon.svg";
 import "../Promo/styles.scss";
 
 export const Promo = ({ currentUser }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/main");
+  };
   return (
-    <section className="promo">
+    <section className="promo" onClick={handleClick}>
       <div className="promo__wrapper">
         <h1 className="promo__title">Привет, {currentUser}</h1>
         <p className="promo__description">

@@ -27,23 +27,23 @@ export const Login = ({ onChangeUserData }) => {
     setChangeLookingFor(() => evt.target.value);
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     const ownerId = uuidv4();
     evt.preventDefault();
-    api
-      .createUser({
+    try {
+      const res = await api.createUser({
         name: changeName,
         avatar:
           "http://timix.nios.ru/sites/timix.nios.ru/files/images/248a5579.jpg",
         about: changeAbout,
         lookingFor: changeLookingFor,
         _id: ownerId,
-      })
-      .then((res) => {
-        onChangeUserData(res);
-        navigate("/promo");
-      })
-      .catch((err) => console.log(err));
+      });
+      onChangeUserData(res);
+      navigate("promo");
+    } catch {
+      console.log(Error);
+    }
   };
 
   return (
