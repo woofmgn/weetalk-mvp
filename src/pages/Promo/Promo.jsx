@@ -5,11 +5,11 @@ import membersIcon from "../../images/members-icon.svg";
 import profileIcon from "../../images/profile-icon.svg";
 import "../Promo/styles.scss";
 
-export const Promo = () => {
+export const Promo = ({ currentUser }) => {
   return (
     <section className="promo">
       <div className="promo__wrapper">
-        <h1 className="promo__title">Привет, Иван!</h1>
+        <h1 className="promo__title">Привет, {currentUser}</h1>
         <p className="promo__description">
           Внизу находится описание каждого раздела нашего сервиса
         </p>

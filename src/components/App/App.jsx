@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Advise } from "../../pages/Advise/Advise";
 import { Favourites } from "../../pages/Favourites/Favourites";
@@ -9,11 +10,19 @@ import { NavBar } from "../NavBar/NavBar";
 import "./App.scss";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({});
+
+  const changeUserData = (userData) => {
+    setCurrentUser(() => userData);
+  };
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/promo" element={<Promo />} />
+        <Route path="/" element={<Login onChangeUserData={changeUserData} />} />
+        <Route
+          path="/promo"
+          element={<Promo currentUser={currentUser.name} />}
+        />
         <Route path="/main" element={<Main />} />
         <Route path="/favourites" element={<Favourites />} />
         <Route path="/advise" element={<Advise />} />

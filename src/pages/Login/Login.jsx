@@ -1,13 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+import { api } from "../../utils/api";
 import "./styles.scss";
 
-export const Login = () => {
+export const Login = ({ onChangeUserData }) => {
+  const navigate = useNavigate();
+  const [changeAvatar, setChangeAvatar] = useState("");
+  const [changeName, setChangeName] = useState("");
+  const [changeAbout, setChangeAbout] = useState("");
+  const [changeLookingFor, setChangeLookingFor] = useState("");
+
+  const hangleChangeAvatar = (evt) => {
+    setChangeAvatar(() => evt.target.value);
+  };
+
+  const handleChangeName = (evt) => {
+    setChangeName(() => evt.target.value);
+  };
+
+  const handleChangeAbout = (evt) => {
+    setChangeAbout(() => evt.target.value);
+  };
+
+  const handleChangeLookingFor = (evt) => {
+    setChangeLookingFor(() => evt.target.value);
+  };
+
+  const handleSubmit = (evt) => {
+    const ownerId = uuidv4();
+    evt.preventDefault();
+    api
+      .createUser({
+        name: changeName,
+        avatar:
+          "http://timix.nios.ru/sites/timix.nios.ru/files/images/248a5579.jpg",
+        about: changeAbout,
+        lookingFor: changeLookingFor,
+        _id: ownerId,
+      })
+      .then((res) => {
+        onChangeUserData(res);
+        navigate("/promo");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <section className="login">
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleSubmit}>
         <h2 className="login-form__photo-title">Добавьте Ваше фото</h2>
         <label className="login-form__photo-label">
-          <input type="file" name="login-form__photo-input" required />
+          <input
+            type="file"
+            name="login-form__photo-input"
+            onChange={hangleChangeAvatar}
+          />
           <span className="login-form__photo-cover"></span>
         </label>
         <p className="login-form__photo-description">
@@ -24,6 +72,7 @@ export const Login = () => {
                 type="text"
                 className="user-form__input user-form__input-name"
                 id="username"
+                onChange={handleChangeName}
               />
             </div>
             <div className="user-form__input-wrapper">
@@ -35,6 +84,7 @@ export const Login = () => {
                 type="text"
                 className="user-form__input user-form__input-name"
                 id="username"
+                onChange={handleChangeAbout}
               />
             </div>
             <div className="user-form__input-wrapper">
@@ -45,6 +95,7 @@ export const Login = () => {
                 type="text"
                 className="user-form__input user-form__input-name"
                 id="username"
+                onChange={handleChangeLookingFor}
               />
             </div>
           </div>
