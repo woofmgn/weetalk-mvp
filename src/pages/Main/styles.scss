@@ -30,8 +30,18 @@
     padding: 0;
     width: 23px;
     height: 23px;
-    background-image: url('../../images/group-button.svg');
+    
+    background-repeat: no-repeat;
     background-color: transparent;
+
+    &_inactive {
+      background-image: url('../../images/group-button-inactive.svg');
+      background-position: center;
+    }
+
+    &_active {
+      background-image: url('../../images/group-button.svg');
+    }
   }
 }
 
@@ -123,7 +133,7 @@
   }
 
   &__member-name {
-    margin: 4px 0 2px 0;
+    margin: 4px 0 2px 7px;
     font-weight: 700;
     font-size: 10px;
     line-height: 12px;
@@ -138,7 +148,7 @@
   }
 
   &__member-about {
-    margin: 0 0 9px 0;
+    margin: 0 0 9px 7px;
     font-weight: 400;
     font-size: 8px;
     line-height: 10px;

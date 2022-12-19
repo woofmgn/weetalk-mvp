@@ -14,7 +14,11 @@ export const Main = () => {
           <h3 className="page-header__title">Участники мероприятия</h3>
           <button
             onClick={() => setIsColumn((prev) => !prev)}
-            className="page-header__group-button"
+            className={`page-header__group-button ${
+              isColumn
+                ? "page-header__group-button_active"
+                : "page-header__group-button_inactive"
+            }`}
             type="button"
           />
         </div>
