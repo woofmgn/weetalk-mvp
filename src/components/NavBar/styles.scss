@@ -21,23 +21,37 @@
   &__item {
     display: flex;
     align-self: center;
-    width: 34px;
-    height: 34px;
     box-sizing: border-box;
 
     &_active {
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       border: 2px solid #FFF;
     }
   }
 
   &__link {
+    text-decoration: none;
     display: flex;
+    flex-direction: column;
     margin: 0 auto;
   }
 
   &__icon {
+    height: 21px;
     display: block;
     margin: auto;
+  }
+
+  &__link-description {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #FFFFFF;
+
+    &_inactive {
+      display: none;
+    }
   }
 }

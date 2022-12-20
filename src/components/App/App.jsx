@@ -13,6 +13,11 @@ import "./App.scss";
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [membersCards, setMembersCards] = useState([]);
+  const [count, setCount] = useState(0);
+
+  const handleSetCount = () => {
+    setCount((prev) => prev + 1);
+  };
 
   const changeUserData = (userData) => {
     setCurrentUser(() => userData);
@@ -33,7 +38,13 @@ function App() {
         <Route path="/" element={<Login onChangeUserData={changeUserData} />} />
         <Route
           path="/promo"
-          element={<Promo currentUser={currentUser.name} />}
+          element={
+            <Promo
+              currentUser={currentUser.name}
+              onSetCount={handleSetCount}
+              count={count}
+            />
+          }
         />
         <Route
           path="/main"
@@ -48,7 +59,7 @@ function App() {
         <Route path="/advise" element={<Advise />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
-      <NavBar />
+      <NavBar count={count} />
     </div>
   );
 }
