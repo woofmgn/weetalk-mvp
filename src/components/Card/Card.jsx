@@ -1,7 +1,39 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { api } from "../../utils/api";
 import "./styles.scss";
 
-export const Card = ({ isColumn, name, avatar, about, lookingFor }) => {
+export const Card = ({
+  isColumn,
+  name,
+  avatar,
+  about,
+  lookingFor,
+  id,
+  owner,
+  likes,
+  isLiked,
+  onSetIsLiked,
+}) => {
+  const [like, setLike] = useState(false);
+
+  const handlerSetLikeCard = async () => {
+    const liked = likes.some((item) => item === owner);
+    api
+      .toggleLikeCard(liked, id, owner)
+      .then(() => {
+        onSetIsLiked();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    const liked = likes.some((item) => item === owner);
+    if (liked) {
+      setLike((prev) => !prev);
+      console.log(like);
+    }
+  }, []);
+
   return (
     <li className={`card ${isColumn ? "card_type_one-column" : null}`}>
       <div
@@ -17,7 +49,8 @@ export const Card = ({ isColumn, name, avatar, about, lookingFor }) => {
           }`}
         />
         <button
-          className={`card__like-button ${
+          onClick={handlerSetLikeCard}
+          className={`card__like-button ${like && "card__like-button_active"} ${
             isColumn ? "card__like-button_type_one-column" : null
           }`}
         />

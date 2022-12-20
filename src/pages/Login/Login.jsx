@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { api } from "../../utils/api";
+import { setStorageUser } from "../../utils/storage";
 import "./styles.scss";
 
 export const Login = ({ onChangeUserData }) => {
@@ -40,9 +41,10 @@ export const Login = ({ onChangeUserData }) => {
         _id: ownerId,
       });
       onChangeUserData(res);
-      navigate("promo");
-    } catch {
-      console.log(Error);
+      navigate("/promo");
+      setStorageUser(ownerId);
+    } catch (err) {
+      console.log(err.message);
     }
   };
 

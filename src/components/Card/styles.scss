@@ -51,6 +51,11 @@
     background-color: transparent;
     background-repeat: no-repeat;
 
+    &_active {
+      height: 17.43px;
+      background-image: url('../../images/card-like-button-active.svg');
+    }
+
     &_type_one-column {
       top: 15px;
       right: 15px;

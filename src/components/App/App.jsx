@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { Advise } from "../../pages/Advise/Advise";
 import { Favourites } from "../../pages/Favourites/Favourites";
 import { Login } from "../../pages/Login/Login";
@@ -7,6 +7,7 @@ import { Main } from "../../pages/Main/Main";
 import { Profile } from "../../pages/Profile/Profile";
 import { Promo } from "../../pages/Promo/Promo";
 import { api } from "../../utils/api";
+import { getStorageUser } from "../../utils/storage";
 import { NavBar } from "../NavBar/NavBar";
 import "./App.scss";
 
@@ -14,9 +15,16 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [membersCards, setMembersCards] = useState([]);
   const [count, setCount] = useState(0);
+  const [owner, setOwner] = useState("");
+  const [isColumn, setIsColumn] = useState(false);
+  const navigate = useNavigate();
 
   const handleSetCount = () => {
     setCount((prev) => prev + 1);
+  };
+
+  const handlerSetIsColumn = () => {
+    setIsColumn((prev) => !prev);
   };
 
   const changeUserData = (userData) => {
@@ -31,6 +39,16 @@ function App() {
       console.log(Error);
     }
   };
+
+  useEffect(() => {
+    const isOwner = getStorageUser();
+    if (isOwner) {
+      setOwner(isOwner);
+      navigate("/main");
+    } else {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className="App">
@@ -52,10 +70,24 @@ function App() {
             <Main
               onGetMembersCards={handleGetMembersCards}
               membersCards={membersCards}
+              owner={owner}
+              onSetIsColumn={handlerSetIsColumn}
+              isColumn={isColumn}
             />
           }
         />
-        <Route path="/favourites" element={<Favourites />} />
+        <Route
+          path="/favourites"
+          element={
+            <Favourites
+              onGetMembersCards={handleGetMembersCards}
+              membersCards={membersCards}
+              owner={owner}
+              onSetIsColumn={handlerSetIsColumn}
+              isColumn={isColumn}
+            />
+          }
+        />
         <Route path="/advise" element={<Advise />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
