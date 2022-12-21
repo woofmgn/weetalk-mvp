@@ -22,7 +22,6 @@ export const Favourites = ({
     const likedCard = membersCards.filter((item) => {
       return item.likes.some((i) => i === owner);
     });
-    console.log(likedCard);
     setIsLikedCard(likedCard);
   };
 

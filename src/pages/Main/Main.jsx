@@ -54,8 +54,8 @@ export const Main = ({
                 id={item.id}
                 owner={owner}
                 likes={item.likes}
-                isLiked={isLiked}
                 onSetIsLiked={handleSetIsLiked}
+                onGetMembersCards={onGetMembersCards}
               />
             );
           })}

@@ -11,8 +11,8 @@ export const Card = ({
   id,
   owner,
   likes,
-  isLiked,
   onSetIsLiked,
+  onGetMembersCards,
 }) => {
   const [like, setLike] = useState(false);
 
@@ -20,8 +20,15 @@ export const Card = ({
     const liked = likes.some((item) => item === owner);
     api
       .toggleLikeCard(liked, id, owner)
-      .then(() => {
-        onSetIsLiked();
+      .then((res) => {
+        const liked = res.likes.some((item) => item === owner);
+        if (liked) {
+          setLike((prev) => !prev);
+          onGetMembersCards();
+        } else {
+          setLike(false);
+          onSetIsLiked();
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -29,8 +36,9 @@ export const Card = ({
   useEffect(() => {
     const liked = likes.some((item) => item === owner);
     if (liked) {
-      setLike((prev) => !prev);
-      console.log(like);
+      setLike(true);
+    } else {
+      setLike(false);
     }
   }, []);
 
