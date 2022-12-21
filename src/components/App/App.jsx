@@ -46,7 +46,6 @@ function App() {
 
   useEffect(() => {
     const isOwner = getStorageUser();
-    console.log(isOwner);
     if (isOwner) {
       setOwner(() => isOwner);
       navigate("/main");
