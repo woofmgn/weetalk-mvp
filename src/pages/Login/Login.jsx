@@ -35,7 +35,7 @@ export const Login = ({ onChangeUserData, onChangeOwner }) => {
       const res = await api.createUser({
         name: changeName,
         avatar:
-          "http://timix.nios.ru/sites/timix.nios.ru/files/images/248a5579.jpg",
+          "https://vse-skorogovorki.ru/wp-content/uploads/2022/01/Credibility2-scaled.jpg",
         about: changeAbout,
         lookingFor: changeLookingFor,
         _id: ownerId,
