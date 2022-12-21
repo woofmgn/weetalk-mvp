@@ -2,19 +2,33 @@ import React, { useEffect, useState } from "react";
 import { Card } from "../../components/Card/Card";
 import "./styles.scss";
 
-export const Main = ({ onGetMembersCards, membersCards }) => {
-  const [isColumn, setIsColumn] = useState(false);
+export const Main = ({
+  onGetMembersCards,
+  membersCards,
+  owner,
+  isColumn,
+  onSetIsColumn,
+}) => {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleSetIsLiked = () => {
+    setIsLiked((prev) => !prev);
+  };
+
+  const handleSetIsColumn = () => {
+    onSetIsColumn();
+  };
 
   useEffect(() => {
     onGetMembersCards();
-  }, []);
+  }, [isLiked]);
   return (
     <section className="members">
       <div className="members__wrapper">
         <div className="page-header">
           <h3 className="page-header__title">Участники мероприятия</h3>
           <button
-            onClick={() => setIsColumn((prev) => !prev)}
+            onClick={handleSetIsColumn}
             className={`page-header__group-button ${
               isColumn
                 ? "page-header__group-button_active"
@@ -37,6 +51,11 @@ export const Main = ({ onGetMembersCards, membersCards }) => {
                 about={item.about}
                 lookingFor={item.lookingFor}
                 isColumn={isColumn}
+                id={item.id}
+                owner={owner}
+                likes={item.likes}
+                onSetIsLiked={handleSetIsLiked}
+                onGetMembersCards={onGetMembersCards}
               />
             );
           })}

@@ -13,16 +13,17 @@ class Api {
         about: data.about,
         lookingFor: data.lookingFor,
         _id: data._id,
+        likes: [],
       });
       return res.data;
-    } catch {
-      return console.log(Error);
+    } catch (err) {
+      console.log(err.message);
     }
   }
 
-  async EditUser(data) {
+  async EditUser(data, id) {
     try {
-      const res = await axios.put(`${this._url}/:id`, {
+      const res = await axios.put(`${this._url}/${id}`, {
         name: data.name,
         avatar: data.avatar,
         about: data.about,
@@ -30,8 +31,8 @@ class Api {
         _id: data._id,
       });
       return res.data;
-    } catch {
-      return console.log(Error);
+    } catch (err) {
+      console.log(err.message);
     }
   }
 
@@ -39,9 +40,46 @@ class Api {
     try {
       const res = await axios.get(this._url);
       return res.data;
-    } catch {
-      return console.log(Error);
+    } catch (err) {
+      console.log(err.message);
     }
+  }
+
+  async _addLike(idCard, userId) {
+    try {
+      const prevData = await axios.get(`${this._url}/${idCard}`);
+      const arr = prevData.data.likes;
+      const res = await axios.put(`${this._url}/${idCard}`, {
+        ...prevData.data,
+        likes: [...arr, userId],
+      });
+      console.log("добавилось");
+      return res.data;
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  async _removeLike(idCard, userId) {
+    try {
+      const prevData = await axios.get(`${this._url}/${idCard}`);
+      const arr = prevData.data.likes;
+      const newArr = arr.filter((item) => item !== userId);
+      const res = await axios.put(`${this._url}/${idCard}`, {
+        ...prevData.data,
+        likes: newArr,
+      });
+      console.log("удалилось");
+      return res.data;
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  toggleLikeCard(status, idCard, userId) {
+    return status
+      ? this._removeLike(idCard, userId)
+      : this._addLike(idCard, userId);
   }
 }
 
