@@ -5,7 +5,7 @@ import { api } from "../../utils/api";
 import { setStorageUser } from "../../utils/storage";
 import "./styles.scss";
 
-export const Login = ({ onChangeUserData }) => {
+export const Login = ({ onChangeUserData, onChangeOwner }) => {
   const navigate = useNavigate();
   const [changeAvatar, setChangeAvatar] = useState("");
   const [changeName, setChangeName] = useState("");

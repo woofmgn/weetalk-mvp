@@ -7,13 +7,14 @@ import { PromoPreview } from "../../components/PromoList/PromoPreview";
 import { PromoProfile } from "../../components/PromoList/PromoProfile";
 import "../Promo/styles.scss";
 
-export const Promo = ({ currentUser, onSetCount, count }) => {
+export const Promo = ({ currentUser, onSetCount, count, onChangeOwner }) => {
   const navigate = useNavigate();
 
   const handlerClickSlide = () => {
     if (count === 4) {
       navigate("/main");
       onSetCount();
+      onChangeOwner(currentUser._id);
       return;
     }
     onSetCount();

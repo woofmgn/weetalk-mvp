@@ -31,6 +31,10 @@ function App() {
     setCurrentUser(() => userData);
   };
 
+  const handleChangeOwner = (newOwner) => {
+    setOwner(newOwner);
+  };
+
   const handleGetMembersCards = async () => {
     try {
       const res = await api.getMembers();
@@ -42,13 +46,14 @@ function App() {
 
   useEffect(() => {
     const isOwner = getStorageUser();
+    console.log(isOwner);
     if (isOwner) {
-      setOwner(isOwner);
+      setOwner(() => isOwner);
       navigate("/main");
     } else {
       navigate("/");
     }
-  }, []);
+  }, [owner]);
 
   return (
     <div className="App">
@@ -60,6 +65,7 @@ function App() {
             <Promo
               currentUser={currentUser.name}
               onSetCount={handleSetCount}
+              onChangeOwner={handleChangeOwner}
               count={count}
             />
           }

@@ -63,10 +63,12 @@ class Api {
   async _removeLike(idCard, userId) {
     try {
       const prevData = await axios.get(`${this._url}/${idCard}`);
+      console.log(prevData);
       const arr = prevData.data.likes;
       const newArr = arr.filter((item) => item !== userId);
+      console.log(newArr);
       const res = await axios.put(`${this._url}/${idCard}`, {
-        ...prevData,
+        ...prevData.data,
         likes: newArr,
       });
       console.log("удалилось");
